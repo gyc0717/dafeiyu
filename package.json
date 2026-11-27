@@ -1,0 +1,8 @@
+{
+  "name": "@local/dsh-qqmusic-butler",
+  "version": "1.0.3",
+  "private": true,
+  "type": "module",
+  "description": "大肥鱼·音乐管家：QQ 音乐歌单管家 + Folia 陪听 + 周报的 DSH agent preset",
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1680px; padding: 56px 60px 48px;
+    background: radial-gradient(1200px 600px at 15% -10%, #16212e 0%, #0b0f14 55%) #0b0f14;
+    color: #e6edf6;
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+  }
+  .kicker { font-size: 15px; letter-spacing: .22em; color: #5aa2ff; margin-bottom: 14px; }
+  h1 { font-size: 44px; font-weight: 700; letter-spacing: -.5px; }
+  h1 span { color: #5aa2ff; }
+  .sub { margin-top: 12px; font-size: 19px; color: #93a6bd; }
+
+  .band { margin-top: 46px; }
+  .band-title { font-size: 15px; letter-spacing: .18em; color: #7e93ab; margin-bottom: 18px; }
+  .band-title b { color: #d7e3f2; font-weight: 600; letter-spacing: .1em; }
+
+  /* 安装四步 */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+  .step {
+    position: relative; background: #121a24; border: 1px solid #24303f; border-radius: 16px;
+    padding: 22px 20px 20px; min-height: 150px;
+  }
+  .step .no {
+    width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center;
+    background: rgba(90,162,255,.14); color: #5aa2ff; font-weight: 700; font-size: 15px; margin-bottom: 14px;
+  }
+  .step h3 { font-size: 19px; margin-bottom: 8px; }
+  .step p { font-size: 14.5px; line-height: 1.55; color: #8fa3bb; }
+  .step .tag { position: absolute; top: 22px; right: 18px; font-size: 12px; color: #4fd1a5;
+    border: 1px solid rgba(79,209,165,.35); border-radius: 999px; padding: 3px 9px; }
+  .arrow { position: absolute; right: -22px; top: 50%; transform: translateY(-50%); color: #35445a; font-size: 22px; }
+
+  /* 架构 */
+  .dsh {
+    background: linear-gradient(180deg, #16212e, #121a24); border: 1px solid #2d3d52;
+    border-radius: 18px; padding: 22px 26px 24px;
+  }
+  .dsh .hd { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+  .dsh .hd strong { font-size: 21px; }
+  .dsh .hd em { font-style: normal; font-size: 14px; color: #7e93ab; }
+  .chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .chip { background: #0e151d; border: 1px solid #24303f; border-radius: 12px; padding: 14px 16px; }
+  .chip b { display: block; font-size: 16px; margin-bottom: 5px; }
+  .chip span { font-size: 13.5px; color: #8296ad; }
+
+  .bus { height: 76px; }
+
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .prog { background: #121a24; border: 1px solid #26333f; border-radius: 16px; padding: 20px 20px 18px; }
+  .prog .kind { font-size: 12px; letter-spacing: .12em; color: #f0a35e; margin-bottom: 8px; }
+  .prog h4 { font-size: 18px; margin-bottom: 8px; }
+  .prog p { font-size: 13.5px; line-height: 1.55; color: #8fa3bb; }
+  .prog .path { margin-top: 10px; font-size: 12.5px; color: #6f839b; font-family: Consolas, monospace; }
+
+  .remote { margin-top: 26px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .remote div {
+    border: 1px dashed #3a4a5f; border-radius: 12px; padding: 12px 16px; font-size: 14px; color: #9db0c6;
+    background: rgba(255,255,255,.015);
+  }
+  .remote b { color: #d7e3f2; font-weight: 600; }
+
+  /* 体验 */
+  .chat { display: grid; grid-template-columns: 1.15fr .85fr; gap: 30px; align-items: start; }
+  .bubble { border-radius: 14px; padding: 14px 18px; font-size: 15.5px; line-height: 1.6; margin-bottom: 12px; max-width: 92%; }
+  .me { background: #1c3a5e; border: 1px solid #2a5580; margin-left: auto; }
+  .bot { background: #121a24; border: 1px solid #24303f; }
+  .tool { display: inline-block; margin-top: 10px; font-size: 12.5px; color: #4fd1a5;
+    border: 1px solid rgba(79,209,165,.3); background: rgba(79,209,165,.07); border-radius: 8px; padding: 4px 9px; }
+  .note { background: #121a24; border: 1px solid #24303f; border-radius: 16px; padding: 20px 22px; }
+  .note h4 { font-size: 16px; margin-bottom: 12px; color: #d7e3f2; }
+  .note li { font-size: 14px; color: #8fa3bb; line-height: 1.9; margin-left: 16px; }
+  .note li b { color: #cfe0f2; font-weight: 600; }
+
+  .foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid #1e2937; display: flex;
+    justify-content: space-between; font-size: 13px; color: #63768c; }
+</style>
+</head>
+<body>
+  <div class="kicker">方案 A · 可行性示意</div>
+  <h1>DSH 插件套装 <span>+</span> 一键安装器</h1>
+  <div class="sub">装一次，之后所有操作都发生在 DSH 的「大肥鱼 · 音乐管家」会话里，不重写界面。</div>
+
+  <div class="band">
+    <div class="band-title"><b>① 安装</b> &nbsp;/&nbsp; 用户只做一件事：运行安装器</div>
+    <div class="steps">
+      <div class="step">
+        <div class="no">1</div><div class="tag">≈2 分钟</div>
+        <h3>运行 install.ps1</h3>
+        <p>双击或一条命令。脚本只做检查与调用，不往系统目录乱写。</p>
+        <div class="arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="no">2</div><div class="tag">自动</div>
+        <h3>准备运行时</h3>
+        <p>建 Python 3.12 隔离环境，装 qqmusic-mcp 与依赖，放好 folia 桥接脚本。</p>
+        <div class="arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="no">3</div><div class="tag">扫码一次</div>
+        <h3>登录 QQ 音乐</h3>
+        <p>弹出浏览器扫码，凭据用 DPAPI 加密，只在本机、只有当前用户能解。</p>
+        <div class="arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="no">4</div><div class="tag">完成</div>
+        <h3>DSH 里多一个预设</h3>
+        <p>新建会话选「大肥鱼 · 音乐管家」，歌单、陪听、周报都在里面。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-title"><b>② 运行</b> &nbsp;/&nbsp; 谁在调用谁（进程间，不打包在一起）</div>
+
+    <div class="dsh">
+      <div class="hd"><strong>DSH 桌面端</strong><em>不需要改，也不随安装包分发</em></div>
+      <div class="chips">
+        <div class="chip"><b>人格 + 模型</b><span>大肥鱼人设、对话、周报文案</span></div>
+        <div class="chip"><b>dsh-soundcheck 插件</b><span>音频分析工具，跑在 DSH 进程里</span></div>
+        <div class="chip"><b>MCP 客户端</b><span>按需拉起两个 stdio 子进程</span></div>
+      </div>
+    </div>
+
+    <svg class="bus" viewBox="0 0 1560 76" width="100%" height="76">
+      <line x1="250" y1="0" x2="250" y2="26" stroke="#3c4f66" stroke-width="1.5"/>
+      <line x1="780" y1="0" x2="780" y2="26" stroke="#3c4f66" stroke-width="1.5"/>
+      <line x1="1310" y1="0" x2="1310" y2="26" stroke="#3c4f66" stroke-width="1.5"/>
+      <line x1="250" y1="26" x2="1310" y2="26" stroke="#3c4f66" stroke-width="1.5"/>
+      <line x1="250" y1="26" x2="250" y2="56" stroke="#3c4f66" stroke-width="1.5"/>
+      <line x1="780" y1="26" x2="780" y2="56" stroke="#3c4f66" stroke-width="1.5"/>
+      <line x1="1310" y1="26" x2="1310" y2="56" stroke="#3c4f66" stroke-width="1.5"/>
+      <polygon points="250,66 245,56 255,56" fill="#3c4f66"/>
+      <polygon points="780,66 775,56 785,56" fill="#3c4f66"/>
+      <polygon points="1310,66 1305,56 1315,56" fill="#3c4f66"/>
+      <text x="262" y="48" fill="#7e93ab" font-size="13" font-family="Microsoft YaHei">stdio MCP</text>
+      <text x="792" y="48" fill="#7e93ab" font-size="13" font-family="Microsoft YaHei">stdio MCP</text>
+      <text x="1322" y="48" fill="#8a7a63" font-size="13" font-family="Microsoft YaHei">插件拉起 · 本地 CLI</text>
+    </svg>
+
+    <div class="grid3">
+      <div class="prog">
+        <div class="kind">外部程序 · Python</div>
+        <h4>qqmusic-mcp</h4>
+        <p>歌单读写、音乐库体检、整理计划与写前探针。34 个工具。</p>
+        <div class="path">D:\mcp\qqmusic-venv</div>
+      </div>
+      <div class="prog">
+        <div class="kind">外部程序 · Python</div>
+        <h4>folia_stage.py</h4>
+        <p>Folia 播放器的桥：当前曲目、播放控制、搜歌点播、队列、歌词。</p>
+        <div class="path">D:\mcp\folia\folia_stage.py</div>
+      </div>
+      <div class="prog">
+        <div class="kind">外部程序 · Python</div>
+        <h4>Music Evidence Engine</h4>
+        <p>BPM / 调性 / 能量 / 分轨 / 听写。CPU 本地跑，音频不出本机。</p>
+        <div class="path">D:\DSH\soundcheck-runtime</div>
+      </div>
+    </div>
+
+    <div class="remote">
+      <div><b>QQ 音乐 Web 接口</b> · 非官方，可能随时变</div>
+      <div><b>Folia Stage API</b> · 127.0.0.1:32107</div>
+      <div><b>歌词接口</b> · 127.0.0.1:32109</div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-title"><b>③ 用起来</b> &nbsp;/&nbsp; 没有新界面，只有对话</div>
+    <div class="chat">
+      <div>
+        <div class="bubble me">把这 5 首挪进【通勤】，顺便清一下重复</div>
+        <div class="bubble bot">
+          先跑了写探针，过了。5 首进【通勤】，回读一致；重名的 2 首只留了一份。<br>原歌单没动，要撤销的话我记了 run_id。
+          <div class="tool">qqmusic_add_songs · qqmusic_remove_songs</div>
+        </div>
+        <div class="bubble bot">
+          现在在放《Pretty Much》，0:00 起，队列 2325 首。要不要顺着这张专辑再来一首？
+          <div class="tool">folia_now_playing</div>
+        </div>
+      </div>
+      <div class="note">
+        <h4>这套方案的实际代价</h4>
+        <ul>
+          <li>装机占用 <b>≈1.0–1.2 GB</b>（Python 运行时 + 依赖 + 模型）</li>
+          <li>分发体积 <b>几 MB</b>，依赖运行时从官方源下载</li>
+          <li>只支持 <b>Windows</b>（凭据用 DPAPI）</li>
+          <li>要用户先有 <b>DSH</b>，且自己扫码登录</li>
+          <li>QQ 接口变了要跟着修；<b>不碰 Folia 代码</b>，只走它的 HTTP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>大肥鱼 · 音乐管家 / 方案 A 示意</span>
+    <span>进程间调用：DSH ↔ stdio MCP ↔ 本机程序 ↔ 远端接口</span>
+  </div>
+</body>
+</html>

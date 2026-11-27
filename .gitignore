@@ -1,0 +1,16 @@
+# 依赖与产物
+node_modules/
+dist/
+build/
+
+# 运行期数据与登录态，绝不进仓库
+*.log
+*.dpapi
+session*
+token*
+.env
+
+# 系统
+Thumbs.db
+desktop.ini
+.DS_Store

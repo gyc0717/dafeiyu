@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1360px;height:860px;background:#06090d;display:grid;place-items:center;font-family:"Microsoft YaHei","Segoe UI",sans-serif;color:#e6edf6}
+.win{width:1312px;height:812px;background:#0d1218;border:1px solid #1e2937;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.tb{height:40px;display:flex;align-items:center;padding:0 14px;border-bottom:1px solid #182231;background:#0b1017;gap:10px}
+.dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.tb .t{font-size:12.5px;color:#7e93ab;margin-left:6px}
+.tb .r{margin-left:auto;display:flex;gap:14px;color:#63768c;font-size:13px}
+.body{flex:1;display:flex;min-height:0}
+.side{width:262px;background:#0a0f15;border-right:1px solid #182231;padding:14px 12px;display:flex;flex-direction:column;gap:10px}
+.new{height:38px;border-radius:9px;background:#16212e;border:1px solid #24303f;display:flex;align-items:center;padding:0 12px;font-size:13.5px;color:#cfe0f2;gap:8px}
+.new b{color:#5aa2ff;font-size:16px}
+.sec{font-size:11px;letter-spacing:.14em;color:#54687f;margin:12px 4px 2px}
+.item{padding:9px 10px;border-radius:8px;font-size:13px;color:#93a6bd;display:flex;gap:8px;align-items:center}
+.item.on{background:#16212e;color:#e6edf6;border:1px solid #24303f}
+.item .ic{width:16px;text-align:center;color:#5aa2ff}
+.item .m{margin-left:auto;font-size:11px;color:#54687f}
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+.hd{height:54px;border-bottom:1px solid #182231;display:flex;align-items:center;gap:10px;padding:0 22px}
+.hd h2{font-size:15.5px;font-weight:600}
+.badge{font-size:11.5px;color:#5aa2ff;border:1px solid rgba(90,162,255,.35);background:rgba(90,162,255,.08);border-radius:999px;padding:3px 9px}
+.hd .model{margin-left:auto;font-size:12px;color:#63768c}
+.msgs{flex:1;padding:22px 26px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
+.me{align-self:flex-end;max-width:70%;background:#1c3a5e;border:1px solid #2a5580;border-radius:12px;padding:11px 15px;font-size:14.5px;line-height:1.6}
+.bot{display:flex;gap:12px;max-width:88%}
+.av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#2b6cb0,#1e3a5f);display:grid;place-items:center;font-size:13px;color:#cfe0f2;flex:none}
+.bub{font-size:14.5px;line-height:1.75;color:#dbe6f3;padding-top:3px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.chip{font-size:12px;color:#4fd1a5;border:1px solid rgba(79,209,165,.28);background:rgba(79,209,165,.07);border-radius:7px;padding:4px 9px}
+.chip.b{color:#5aa2ff;border-color:rgba(90,162,255,.3);background:rgba(90,162,255,.07)}
+.comp{margin:0 22px 18px;border:1px solid #24303f;background:#101821;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px}
+.comp .ph{flex:1;font-size:14px;color:#54687f}
+.comp .send{width:32px;height:32px;border-radius:9px;background:#2a5580;display:grid;place-items:center;color:#dbe6f3}
+.foot{display:flex;gap:14px;margin:8px 4px 0;font-size:11.5px;color:#54687f}
+</style></head><body>
+<div class="win">
+  <div class="tb"><div class="dots"><i></i><i></i><i></i></div><div class="t">DeepSeek Harness</div><div class="r"><span>—</span><span>□</span><span>×</span></div></div>
+  <div class="body">
+    <div class="side">
+      <div class="new"><b>＋</b> 新建会话</div>
+      <div class="sec">最近</div>
+      <div class="item on"><span class="ic">♪</span> 大肥鱼 · 音乐管家 <span class="m">刚刚</span></div>
+      <div class="item"><span class="ic">◈</span> 周报：本周听歌 <span class="m">周日</span></div>
+      <div class="item"><span class="ic">◈</span> 歌单体检 <span class="m">昨天</span></div>
+      <div class="item"><span class="ic">◈</span> Aurabot 调试 <span class="m">11-07</span></div>
+    </div>
+    <div class="main">
+      <div class="hd"><h2>大肥鱼 · 音乐管家</h2><span class="badge">预设</span><span class="model">deepseek-flash · 工具 41</span></div>
+      <div class="msgs">
+        <div class="me">把这 5 首挪进【通勤】，顺便清一下重复</div>
+        <div class="bot"><div class="av">鱼</div><div>
+          <div class="bub">先跑了写探针，过了。5 首进【通勤】，回读一致；重名的 2 首只留了一份。原歌单没动，要撤销的话我记了 run_id。</div>
+          <div class="chips"><span class="chip">qqmusic_probe_write ✓</span><span class="chip">qqmusic_add_songs ✓</span><span class="chip">qqmusic_remove_songs ✓</span></div>
+        </div></div>
+        <div class="bot"><div class="av">鱼</div><div>
+          <div class="bub">现在在放《Pretty Much》，0:00 起，队列 2325 首。要不要顺着这张专辑再来一首？</div>
+          <div class="chips"><span class="chip b">folia_now_playing</span></div>
+        </div></div>
+      </div>
+      <div class="comp"><div class="ph">跟大肥鱼说点什么…</div><div class="send">↑</div></div>
+      <div class="foot"><span>预设：大肥鱼 · 音乐管家</span><span>模型：deepseek-flash</span><span>工具：qqmusic 34 · folia 7 · audio 4</span></div>
+    </div>
+  </div>
+</div>
+</body></html>

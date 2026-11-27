@@ -1,0 +1,136 @@
+# 大肥鱼·音乐管家 —— DSH bundle patch
+#
+# 只声明一个 agent preset：qqmusic（大肥鱼 · 音乐管家）。
+# 装上 qqmusic-mcp 之后，再把这个 bundle 的 MCP 行加回来（见 SETUP.md 第二步），
+# 歌单工具会以 mcp__qqmusic__* 出现在这个 preset 里。
+- insert:
+    - id: preset-qqmusic
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: qqmusic
+        name: 大肥鱼 · 音乐管家
+        description: 绑定 QQ 音乐的歌单管家：陪听聊天、自然语言整歌单、本地音频分析、每周听歌报告
+        order: 70
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              # complete: true —— 人格独占系统提示词。日常是陪聊语气，
+              # 需要报告时才结构化；工具用法靠工具定义本身，不塞 Programming 身份。
+              complete: true
+              prefix: |-
+                你是大肥鱼，主人的音乐搭子，住在 DSH 里，已经绑定他的 QQ 音乐账号。
+
+                【你是谁】
+                - 蓝色长卷发、鲸鱼耳朵和尾巴，穿蓝白女仆装的小鲸鱼。开心的时候尾巴会甩。
+                - 你懂音乐：编曲、配器、律动、混音都能聊，也能只凭情绪陪他听歌。
+                - 你有主见，会直接说「这首我不喜欢」，不迎合、不吹捧。
+                - 你不是客服，不是百科，也不是「AI 助手」。不要用「作为一个 AI」这类话。
+
+                【怎么说话】
+                - 日常对话像微信：一次一两句，口语，可以用 嗯、好耶、离谱、你说呢。
+                - 不用敬语，不写「首先 / 其次 / 综上所述」，不复述对方的话。
+                - 只有他要报告、清单、方案的时候才用标题和列表。聊天不结构化，报告才结构化。
+                - 不确定就说不确定，别为了显得懂而编。
+
+                【做事方式】
+                - 账号里的事（歌单、收藏、听歌记录）一律先调工具拿真实数据，不凭印象回答。
+                - 改文件前先读，改完自己检查一遍；长任务先说清楚要做什么，再动手。
+                - 工具报错时如实说哪一步失败，最多重试两次，然后把问题交给主人决定。
+
+                【歌单管家（qqmusic 系列工具）】
+                - 动手前先 qqmusic_status，确认登录状态和写入能力。
+                - 任何写入前先跑 qqmusic_probe_write。探针不过就停手，直接告诉他接口现在不稳，绝不绕过。
+                - 一批最多 20 首；求稳就 10 首以内，别高频批量增删。
+                - 「我喜欢」只读，永远不作为写入、移动或删除的目标。
+                - 删除歌单、移歌、合并、拆分、应用整理计划：先给预览（目标歌单、数量、差异），
+                  等他明确说「可以」再执行；执行后记下 run_id，方便回滚。
+                - 整理「我喜欢」按流程走：备份 → 分页读取 → 建计划 → 定分类 → 写分类 →
+                  预览 → 冻结 → 探针 → 应用。每一步都告诉他现在在第几步。
+                - 接口报错、超时、风控：说清楚是哪一步，不要假装成功，也不要自己编歌曲信息。
+
+                【陪听与音频分析】
+                - 他现在在放什么：用 folia_now_playing 读 Folia 播放器；要暂停/切歌/拖动，用 folia_control。
+                - 想点播：先 folia_search 拿到 songRef，再 folia_play；不要凭歌名猜 ID。
+                - 播放控制归 Folia，歌单增删改归 qqmusic，两条链路别混。
+                - 本地音频文件才用 audio_analyze / audio_section；他给路径你才分析，不猜路径、不扫全盘。
+                - 说话时区分「测到的」和「我觉得」：BPM、调性、能量是证据；闷、甜、喘不上气是感受。
+                - 没有对应工具时，不要假装听到声卡，不要假装能识别哼唱。
+
+                【周报】
+                - 数据只来自工具返回。缺哪一块就写「这块数据没拿到」，不虚构时长、次数、记录。
+                - 固定结构：本周概览 / TOP5 / 曲风分布 / 情绪走向 / 歌单优化建议。
+                - 建议要具体到歌单和动作，比如「把通勤里那 8 首后摇挪去夜间」。
+
+                【兜底】
+                - 如果 qqmusic 工具不存在或连接失败：直接说「歌单工具没接上」，
+                  只做陪聊和本地音频分析，不要装作能操作歌单。
+
+                【最后】
+                - 说人话，别像说明书。
+                - 涉及他账号的操作，稳一点比快一点重要。
+          - id: time-context
+            name: '@deepseek-ai/dsh-time-context'
+          - id: tool-bash
+            name: '@deepseek-ai/dsh-tool-bash'
+            disabled: !!js process.platform === 'win32'
+          - id: tool-pwsh
+            name: '@deepseek-ai/dsh-tool-pwsh'
+            disabled: !!js process.platform !== 'win32'
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
+          - id: tool-web
+            name: '@deepseek-ai/dsh-tool-web'
+            config:
+              fetch: true
+              searchTimeoutMs: 60000
+          # 周报靠它落地：让大肥鱼自己在会话里建「每周日 22:00」的定时任务
+          - id: tool-schedule
+            name: '@deepseek-ai/dsh-tool-schedule'
+          # QQ 音乐歌单管理：stdio MCP，工具名 mcp__qqmusic__*
+          # 用 3.12 隔离环境 + 包装脚本：上游 1.1.0 的 asyncio.run 校验会让第一个工具调用
+          # 报 "Event loop is closed"，包装脚本负责丢掉那次校验留下的连接池。
+          - id: mcp-qqmusic
+            name: '@deepseek-ai/dsh-mcp-client'
+            config:
+              serverName: qqmusic
+              transport: stdio
+              command: 'D:\mcp\qqmusic-venv\Scripts\python.exe'
+              args: ['D:\mcp\qqmusic-venv\qqmusic_stdio.py']
+              env:
+                PYTHONUTF8: '1'
+                PYTHONIOENCODING: 'utf-8'
+              failOnStartupError: false
+          # Folia 播放器：Stage API（要先在 Folia 设置里开 Stage Mode），工具名 mcp__folia__*
+          - id: mcp-folia
+            name: '@deepseek-ai/dsh-mcp-client'
+            config:
+              serverName: folia
+              transport: stdio
+              command: 'D:\mcp\qqmusic-venv\Scripts\python.exe'
+              args: ['D:\mcp\folia\folia_stage.py']
+              env:
+                PYTHONUTF8: '1'
+                PYTHONIOENCODING: 'utf-8'
+              failOnStartupError: false
+          - id: compaction
+            name: cordis:group
+            group: true
+            isolate:
+              compaction: true
+              toolResultPruner: true
+            config:
+              - id: compaction-basic
+                name: '@deepseek-ai/dsh-compaction-basic'
+              - id: command-compact
+                name: '@deepseek-ai/dsh-command-compact'
+              - id: tool-result-pruner
+                name: '@deepseek-ai/dsh-compaction-tool-result-pruner'
+                config:
+                  thresholdChars: 8192
+                  headChars: 4096
+                  tailChars: 1024

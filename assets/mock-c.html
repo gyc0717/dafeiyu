@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1360px;height:860px;background:#06090d;display:grid;place-items:center;font-family:"Microsoft YaHei","Segoe UI",sans-serif;color:#e6edf6}
+.bw{width:1312px;height:812px;border:1px solid #1e2937;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.6);background:#0d1218}
+.tabs{height:38px;background:#080c11;display:flex;align-items:flex-end;padding:0 10px;gap:6px}
+.tab{height:30px;border-radius:8px 8px 0 0;background:#0d1218;border:1px solid #1e2937;border-bottom:none;display:flex;align-items:center;padding:0 12px;gap:8px;font-size:12px;color:#cfe0f2;min-width:210px}
+.tab .f{width:12px;height:12px;border-radius:3px;background:linear-gradient(135deg,#2b6cb0,#1b3a5c)}
+.tab .x{margin-left:auto;color:#54687f}
+.tabbar{flex:1}
+.wbtn{display:flex;gap:12px;color:#63768c;font-size:12px;padding:0 8px 8px}
+.omni{height:42px;background:#0d1218;border-bottom:1px solid #182231;display:flex;align-items:center;gap:10px;padding:0 14px}
+.omni .nav{display:flex;gap:12px;color:#54687f;font-size:13px}
+.addr{flex:1;height:28px;border-radius:14px;background:#0a0f15;border:1px solid #1e2937;display:flex;align-items:center;padding:0 12px;font-size:12px;color:#8fa3bb;gap:8px}
+.addr b{color:#4fd1a5;font-weight:400}
+.page{flex:1;display:flex;flex-direction:column;min-height:0;background:radial-gradient(900px 400px at 20% -20%,#121c28,#0b1017 60%)}
+.nav{height:56px;border-bottom:1px solid #182231;display:flex;align-items:center;gap:22px;padding:0 24px;background:rgba(9,13,18,.6)}
+.brand{display:flex;align-items:center;gap:9px;font-size:14.5px}
+.brand .lg{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#2b6cb0,#1b3a5c);display:grid;place-items:center;font-size:12px}
+.links{display:flex;gap:20px;font-size:13px;color:#8fa3bb;margin-left:8px}
+.links .on{color:#e6edf6;position:relative}
+.links .on:after{content:"";position:absolute;left:0;right:0;bottom:-18px;height:2px;background:#5aa2ff}
+.pill{margin-left:auto;font-size:11.5px;color:#4fd1a5;border:1px solid rgba(79,209,165,.3);background:rgba(79,209,165,.07);border-radius:999px;padding:4px 10px;display:flex;align-items:center;gap:7px}
+.pill i{width:6px;height:6px;border-radius:50%;background:#4fd1a5;display:block}
+.wrap{flex:1;display:flex;min-height:0}
+.left{flex:1;display:flex;flex-direction:column;min-width:0;border-right:1px solid #182231}
+.msgs{flex:1;padding:20px 24px;display:flex;flex-direction:column;gap:14px}
+.me{align-self:flex-end;max-width:72%;background:#1c3a5e;border:1px solid #2a5580;border-radius:12px;padding:10px 14px;font-size:14px;line-height:1.6}
+.bot{display:flex;gap:10px;max-width:90%}
+.av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2b6cb0,#1e3a5f);display:grid;place-items:center;font-size:12px;flex:none}
+.bub{font-size:14px;line-height:1.75;color:#dbe6f3;padding-top:2px}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.chip{font-size:11.5px;color:#4fd1a5;border:1px solid rgba(79,209,165,.28);background:rgba(79,209,165,.07);border-radius:7px;padding:3px 8px}
+.chip.b{color:#5aa2ff;border-color:rgba(90,162,255,.3);background:rgba(90,162,255,.07)}
+.comp{margin:0 24px 16px;border:1px solid #24303f;background:#101821;border-radius:12px;padding:11px 14px;display:flex;align-items:center;font-size:13.5px;color:#54687f}
+.comp .send{margin-left:auto;width:30px;height:30px;border-radius:9px;background:#2a5580;display:grid;place-items:center;color:#dbe6f3}
+.right{width:330px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.card{background:#101821;border:1px solid #24303f;border-radius:14px;padding:15px}
+.card h4{font-size:11.5px;letter-spacing:.14em;color:#63768c;font-weight:500;margin-bottom:12px}
+.cover{height:120px;border-radius:10px;background:radial-gradient(110px 80px at 30% 30%,#3a6ea5,#1a2c42 60%,#111a26);display:grid;place-items:center;font-size:28px;color:rgba(207,224,242,.5);margin-bottom:11px}
+.tk{font-size:15px}.ar{font-size:12px;color:#8fa3bb;margin:3px 0 10px}
+.bar{height:4px;border-radius:2px;background:#24303f}.bar i{display:block;height:100%;width:2%;background:#5aa2ff}
+.tm{display:flex;justify-content:space-between;font-size:11px;color:#54687f;margin-top:6px}
+.kv{display:flex;justify-content:space-between;font-size:12.5px;color:#8fa3bb;padding:5px 0;border-bottom:1px dashed #1b2534}
+.kv:last-child{border:none}.kv b{color:#dbe6f3;font-weight:500}
+.statusbar{height:28px;border-top:1px solid #182231;background:#090d12;display:flex;align-items:center;gap:18px;padding:0 14px;font-size:11px;color:#54687f}
+.statusbar .green{color:#4fd1a5}
+</style></head><body>
+<div class="bw">
+  <div class="tabs">
+    <div class="tab"><span class="f"></span>大肥鱼音乐管家<span class="x">×</span></div>
+    <div class="tabbar"></div>
+    <div class="wbtn"><span>—</span><span>□</span><span>×</span></div>
+  </div>
+  <div class="omni"><span class="nav">← → ↻</span><div class="addr">🔒 <b>127.0.0.1:8848</b> <span style="color:#54687f">/ chat</span></div><span style="color:#54687f;font-size:12px">☆</span></div>
+  <div class="page">
+    <div class="nav">
+      <div class="brand"><div class="lg">🐟</div>大肥鱼音乐管家</div>
+      <div class="links"><span class="on">聊天</span><span>歌单</span><span>周报</span><span>设置</span></div>
+      <div class="pill"><i></i>本地服务已连接</div>
+    </div>
+    <div class="wrap">
+      <div class="left">
+        <div class="msgs">
+          <div class="me">帮我把这周新加的歌按曲风分一下</div>
+          <div class="bot"><div class="av">鱼</div><div>
+            <div class="bub">这周新加 12 首：后摇 6、city pop 3、民谣 2、剩 1 首拿不准（偏氛围）。先给你预览，不写回。</div>
+            <div class="chips"><span class="chip">qqmusic_export_liked ✓</span><span class="chip b">qqmusic_preview_plan</span></div>
+          </div></div>
+          <div class="me">行，写吧</div>
+          <div class="bot"><div class="av">鱼</div><div>
+            <div class="bub">冻了方案、跑了探针、写了 12 首，回读一致。要撤就按 run_id 回滚。</div>
+            <div class="chips"><span class="chip">qqmusic_finalize_plan ✓</span><span class="chip">qqmusic_apply_plan ✓</span></div>
+          </div></div>
+        </div>
+        <div class="comp">跟大肥鱼说点什么…<div class="send">↑</div></div>
+      </div>
+      <div class="right">
+        <div class="card">
+          <h4>正在播放</h4>
+          <div class="cover">♫</div>
+          <div class="tk">Pretty Much</div><div class="ar">赵希予 · 半夏心动</div>
+          <div class="bar"><i></i></div>
+          <div class="tm"><span>0:00</span><span>3:12</span></div>
+        </div>
+        <div class="card">
+          <h4>本周</h4>
+          <div class="kv"><span>新增收藏</span><b>12 首</b></div>
+          <div class="kv"><span>整理进度</span><b>100%</b></div>
+          <div class="kv"><span>待整理</span><b>1 首</b></div>
+          <div class="kv"><span>上次周报</span><b>11-02</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="statusbar"><span class="green">●</span><span>本地服务 127.0.0.1:8848</span><span>Folia :32107</span><span>歌词 :32109</span><span>引擎 0.1.2</span><span style="margin-left:auto">账号 ***7480 · 20 歌单</span></div>
+  </div>
+</div>
+</body></html>
