@@ -7,6 +7,9 @@
 这是一个 **DSH agent preset**（`@local/dsh-qqmusic-butler`，preset id `qqmusic`），
 本体只有一份 `cordis.patch.yml` —— 人格设定、工具装配、定时任务都在里面。
 
+> 装法、要准备的依赖、怎么跟它说话 → **[使用说明.md](使用说明.md)**
+> 界面方案效果图 → **[效果展示.md](效果展示.md)**
+
 ---
 
 ## 它是什么
